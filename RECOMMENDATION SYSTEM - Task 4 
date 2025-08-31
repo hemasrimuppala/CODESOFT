@@ -1,0 +1,83 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyOo0/H3V8ULpppFdEmNRq5w",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/hemasrimuppala/CODESOFT/blob/main/RECOMMENDATION%20SYSTEM%20-%20Task%204%20\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "ddzHIzM0j9nI",
+        "outputId": "746f7134-2008-4401-e585-459854f403ec"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "User Preferences: ['sci-fi', 'action']\n",
+            "Recommended Movies: ['Inception', 'Avengers: Endgame', 'Interstellar', 'The Dark Knight']\n"
+          ]
+        }
+      ],
+      "source": [
+        "# Simple Recommendation System (Content-Based Filtering)\n",
+        "\n",
+        "# Sample dataset: movies with genres\n",
+        "movies = {\n",
+        "    \"Inception\": [\"sci-fi\", \"thriller\", \"action\"],\n",
+        "    \"Interstellar\": [\"sci-fi\", \"drama\", \"adventure\"],\n",
+        "    \"The Dark Knight\": [\"action\", \"crime\", \"drama\"],\n",
+        "    \"Avengers: Endgame\": [\"action\", \"sci-fi\", \"adventure\"],\n",
+        "    \"Titanic\": [\"romance\", \"drama\"],\n",
+        "    \"The Notebook\": [\"romance\", \"drama\"]\n",
+        "}\n",
+        "\n",
+        "# Function to recommend movies based on user preference\n",
+        "def recommend(user_likes):\n",
+        "    recommendations = {}\n",
+        "    for movie, genres in movies.items():\n",
+        "        # Find common genres between user preference and movie genres\n",
+        "        score = len(set(user_likes) & set(genres))\n",
+        "        if score > 0:\n",
+        "            recommendations[movie] = score\n",
+        "\n",
+        "    # Sort by highest score\n",
+        "    sorted_recommendations = sorted(recommendations.items(), key=lambda x: x[1], reverse=True)\n",
+        "\n",
+        "    return [movie for movie, score in sorted_recommendations]\n",
+        "\n",
+        "# Example: user likes sci-fi and action\n",
+        "user_preference = [\"sci-fi\", \"action\"]\n",
+        "print(\"User Preferences:\", user_preference)\n",
+        "print(\"Recommended Movies:\", recommend(user_preference))"
+      ]
+    }
+  ]
+}
